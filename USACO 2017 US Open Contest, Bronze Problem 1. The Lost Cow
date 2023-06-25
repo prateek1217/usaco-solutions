@@ -1,0 +1,105 @@
+#include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+template <typename T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+#define endl '\n'
+#define popcount __builtin_popcount
+#define poplenl   __builtin_clzl
+#define poplen   __builtin_clz
+#define sz(x) (int)x.size()
+#define all(x) x.begin(),x.end()
+#define rep(i,x,y) for (int i=x;i<y;i++)
+#define lenght length
+void DBG() {
+	cerr << "]" << endl;
+}
+template<class H, class... T> void DBG(H h, T... t) {
+	cerr << h;
+	if(sizeof...(t))
+		cerr << ", ";
+	DBG(t...);
+}
+#ifndef ONLINE_JUDGE
+#define debug(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
+#else 
+#define debug(...)
+#endif
+template <typename T>
+void debugv(vector <T> &v){ for(int i=0;i<v.size();i++)cerr<<v[i]<<" ";cerr<<endl; }
+template <typename T>
+void debugvv(vector <vector <T>>&v){
+	for(int i=0;i<v.size();i++){
+		cerr<<i<<" ==> " ;
+		for(int j=0;j<v[i].size();j++)
+		cerr<<v[i][j]<<" ";
+		cerr<<endl;
+	}
+}
+template <typename T>
+void debugs(set <T> &s){cerr<<"size "<<s.size()<<endl; for (auto item : s) cerr<<item<<" "; cerr<<endl;}
+typedef long long ll;
+ll mod=1e9+7;
+ll binpow(ll b, ll e){
+	ll ans = 1;
+	while (e !=0){
+		if (e&1) ans=(ans%mod*b%mod);
+		e=e>>1;
+		b  = (b*b)%mod;
+	}
+	return ans;
+}
+long long inv(long long  a, long long  mod) {
+     long long  g = mod, x = 0, y = 1;
+     while(a != 0) {
+          long long  q = g / a;
+          g %= a; swap(g, a);
+          x -= q * y; swap(x, y);
+     } return x < 0? x + mod : x;
+}
+
+void io(string n) {
+	freopen((n+".in").c_str() , "r" , stdin );
+	freopen((n+".out").c_str() , "w" , stdout );
+}
+
+int main(){
+     #ifdef ONLINE_JUDGE
+     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+     #endif
+     io("lostcow");
+	int x,y;
+     cin>>x>>y;
+  int sum=0;
+int cv=x;  // cv= current position
+
+if(x==y)
+{
+     cout<<0;
+     return 0;
+}
+for(int i=0;i<=10;i++)
+{
+     int power=pow(-2,i);
+     if(cv<=y && y<=x+power)
+     {
+          sum+=abs(y-cv);
+          break;
+     }
+     else if(y<=cv && x+power<=y)
+     {
+          sum+=abs(y-cv);
+          break;
+     }
+     else
+     {
+          sum=sum+abs(x+power-cv);
+          cv=x+power;
+     }
+     // debug(sum,cv);
+
+}
+cout<<sum;
+}
