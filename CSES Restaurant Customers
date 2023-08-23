@@ -1,0 +1,33 @@
+int n;
+     cin>>n;
+     vector <pair<int,int>>v;
+     rep(i,0,n)
+     {
+          int a,b;
+          cin>>a>>b;
+          v.push_back({a,b});
+     }
+
+     sort(all(v));
+     multiset<int>s;
+     int cnt=1;
+     s.insert(v[0].second);
+     for (int i=1;i<v.size();i++)
+     {
+          auto it =s.begin();
+          if (v[i].first<*it)
+          {
+               s.insert(v[i].second);
+               if (s.size()>cnt)
+               cnt=s.size();
+          }
+          if (v[i].first>*it)
+          {
+               s.erase(*it);
+               s.insert(v[i].second);
+               if (cnt>s.size())
+               cnt=s.size();
+
+          }
+     }
+     cout<<cnt;
