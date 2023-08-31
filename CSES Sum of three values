@@ -1,0 +1,39 @@
+     ll n,s;
+     cin>>n>>s;
+     vector <ll>v(n);
+   multimap<ll,ll>m;
+     for (ll i=0;i<n;i++)
+{
+     cin>>v[i];
+     m.insert({v[i],i+1});
+}
+     sort(all(v));
+     for (ll i=0;i<n-2;i++)
+     {
+          ll j=i+1;
+          ll k=n-1;
+          while(j<k)
+          {
+               if (v[i]+v[j]+v[k]<s)
+               j++;
+               else if (v[i]+v[j]+v[k]==s)
+               {
+                    auto it = m.find(v[i]);
+                    cout<<it->second<<" ";
+                    m.erase(it);
+                    auto itt = m.find(v[j]);
+                    cout<<itt->second<<" ";
+                    m.erase(itt);
+                    auto ittt= m.find(v[k]);
+                    cout<<ittt->second<<" ";
+                    m.erase(ittt);
+                    return ;
+                    
+                    return ;
+               }
+               else
+               k--;
+          }
+     }
+     cout<<"IMPOSSIBLE";
+     return;
