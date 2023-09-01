@@ -1,0 +1,45 @@
+https://codeforces.com/problemset/problem/701/C
+
+  int n;
+     cin>>n;
+     set<char>st;
+     string s;
+     cin>>s;
+     for (int i=0;i<s.size();i++)
+     {
+          st.insert(s[i]);
+     }
+     int k = st.size();
+     map<char,int>m;
+     int cnt =0;
+     int i=0,j=0;
+     int mini=INT_MAX;
+     while(j<n)
+     {
+          m[s[j]]++;
+          cnt=m.size();
+          
+          if(cnt>=k)
+          {
+               if(cnt==k)
+          mini=min(mini,j-i+1);
+          while(cnt>=k)
+          {
+               m[s[i]]--;
+               if (m[s[i]]==0)
+               {
+               cnt--;
+               m.erase(s[i]);
+               }
+               i++;
+               if (cnt==k)
+          mini=min(mini,j-i+1);
+          }
+          
+          }
+          j++;
+
+     }
+     
+     cout<<mini;
+     
