@@ -1,0 +1,35 @@
+cf link : https://codeforces.com/contest/814/problem/C
+
+
+
+	int n;
+     cin>>n;
+     string s;
+     cin>>s;
+     int q;
+     cin>>q;
+     while(q--)
+     {
+          
+          int a;
+          cin>>a;
+          char c;
+          cin>>c;
+          int maxi=INT_MIN;
+          int i=0;
+         for (int j=0;j<n;j++)
+         {
+          if (s[j]!=c)
+          a--;
+          while(a<0)
+          {
+               if (s[i]!=c)
+               a++;
+               i++;
+          }
+          if (a>=0)
+          maxi= max(maxi,j-i+1);
+         }
+          cout<<maxi<<endl;
+
+     }
