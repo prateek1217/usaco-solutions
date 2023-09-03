@@ -1,0 +1,70 @@
+int n;
+     cin>>n;
+     vector <pair<int,int>>v,tt;
+     for (int i=0;i<n;i++)
+     {
+          int a,b;
+          cin>>a>>b;
+          v.push_back({a,b});
+     }
+     tt=v;
+     sort(all(v));
+set<pair<int,int>>s;
+vector <int>ans;
+multimap<ll,ll>ok;
+ans.push_back(1);
+s.insert({v[0].second,1});
+int maxi=1;
+ok.insert({v[0].first,1});
+for (int i=1;i<n;i++)
+{
+     if (s.size()!=0)
+     {
+     auto it = s.begin();
+     if (it->first<v[i].first)
+     {
+          
+          ans.push_back(it->second);
+          ok.insert({v[i].first,it->second});
+          s.insert({v[i].second,it->second});
+          s.erase(it);
+          
+     }
+     else if (it->first==v[i].first)
+     {
+          maxi++;
+          ans.push_back(maxi);
+          ok.insert({v[i].first,maxi});
+          s.insert({v[i].second,maxi});
+     }
+     else
+     {
+           maxi++;
+          ans.push_back(maxi);
+          ok.insert({v[i].first,maxi});
+          s.insert({v[i].second,maxi});
+
+     }
+     }
+     else
+     {
+          maxi++;
+          ans.push_back(maxi);
+          ok.insert({v[i].first,maxi});
+          s.insert({v[i].second,maxi});
+     }
+     
+}
+     set<int>st;
+     for (auto i:ans)
+     st.insert(i);
+
+cout<<st.size()<<endl;
+     
+
+     for(int i=0;i<n;i++)
+     {
+          auto it = ok.find(tt[i].first);
+        cout<<it->second<<" ";
+          ok.erase(it);
+     } 
