@@ -1,0 +1,71 @@
+cf : https://codeforces.com/contest/702/problem/C
+
+concept : prefix array
+
+void solve()
+{
+     ll n , m ;
+     cin>>n>>m;
+     vector <ll>v;
+     set<ll>st1,st2;
+     for (ll i=0;i<n;i++)
+     {
+          ll x;
+          cin>>x;
+          v.push_back(x);
+          st2.insert(x);
+     }
+     
+     for (ll i=0;i<m;i++)
+     {
+          ll x;
+          cin>>x;
+          v.push_back(x);
+          st1.insert(x);
+     }
+     sort(all(v));
+     ll curr=INT_MAX;
+     vector <ll>dp1(v.size(),-1),dp2(v.size(),-1);
+     for (ll i=0;i<v.size();i++)
+     {
+          auto it = st1.find(v[i]);
+          auto itt =st2.find(v[i]);
+          bool f=0;
+          if (it != st1.end() )
+          {
+          curr=*it;
+          
+          }
+          
+               dp1[i]=curr;
+          
+     }
+     // debugv(dp1);
+     for (ll i=v.size()-1;i>=0;i--)
+     {
+           auto it = st1.find(v[i]);
+          auto itt =st2.find(v[i]);
+          bool f=0;
+          if (it != st1.end() )
+          {
+          curr=*it;
+          
+          }
+          
+               dp2[i]=curr;
+     }
+vector <ll>ans(v.size());
+for ( ll i=0;i<v.size();i++)
+{
+ans[i]=min(abs(v[i]-dp1[i]),abs(v[i]-dp2[i]));
+}
+sort(all(ans));
+cout<<ans[ans.size()-1];
+}
+int main(){
+     #ifdef ONLINE_JUDGE
+     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+     #endif
+solve();
+
+}
