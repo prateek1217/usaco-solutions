@@ -1,0 +1,37 @@
+cses : https://cses.fi/problemset/task/1074/
+
+
+int n ;
+     cin>>n;
+     vector<int>v(n);
+     rep(i,0,n)
+     cin>>v[i];
+     sort(all(v));
+     if (n%2!=0)
+     {
+          
+          ll ok=0;
+ ll c= v[n/2];
+          for (int i=0;i<n;i++)
+          
+          ok= ok + abs((ll)c-(ll)v[i]);
+          cout<<ok;
+     }
+     else
+     {
+          ll c1=v[n/2];
+
+          ll ok1=0;
+          for (int i=0;i<n;i++)
+          
+          ok1= ok1 + abs((ll)c1-(ll)v[i]);
+          ll c2=v[n/2-1];
+          ll ok2=0;
+          
+          for (int i=0;i<n;i++)
+          {
+               ok2= ok2 + abs ((ll)c2-(ll)v[i]);
+          }
+          cout<<min(ok1,ok2);
+
+     }
