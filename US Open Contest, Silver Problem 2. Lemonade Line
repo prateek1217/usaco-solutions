@@ -1,0 +1,21 @@
+http://www.usaco.org/index.php?page=viewproblem2&cpid=835
+
+
+     io("lemonade");
+	int n ;cin>>n;
+     vector<int>v(n);
+     rep(i,0,n)
+     cin>>v[i];
+     multiset <int>m;
+     sort(all(v));
+     reverse(all(v));
+     int ans =0;
+     for (int i=0;i<n;i++)
+     {
+          if (v[i]>=m.size())
+          {
+               ans++;
+               m.insert(v[i]);
+          }
+     }
+cout<<ans;
