@@ -1,0 +1,26 @@
+cses : https://cses.fi/problemset/task/1073/
+
+
+int n ;
+     cin>>n;
+     multiset<int>st;
+     int cnt =0;
+     rep(i,0,n)
+     {
+          int x;
+          cin>>x;
+          auto it= st.upper_bound(x);
+          if (it==st.end())
+          {
+               cnt++;
+               st.insert(x);
+          }
+          else
+          {
+               st.erase(it);
+               st.insert(x);
+          }
+
+
+     }
+     cout<<cnt;
