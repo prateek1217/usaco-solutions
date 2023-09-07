@@ -1,0 +1,42 @@
+http://www.usaco.org/index.php?page=viewproblem2&cpid=571
+
+
+  io("highcard");
+	int n ;
+     cin>>n;
+     set<int>e,b;
+     for (int i=0;i<n;i++)
+     {
+          int x;
+          cin>>x;
+          e.insert(x);
+     }
+     for (int i=1;i<=2*n;i++)
+     {
+          if (e.find(i)==e.end())
+          {
+               b.insert(i);
+          }
+     }
+     int cnt =0;
+     while(e.size()!=0 && b.size()!=0)
+     {
+          auto it = (--e.end());
+          auto itt= b.upper_bound(*it);
+          if (itt==b.end())
+          {
+               e.erase(it);
+               auto ittt=b.begin();
+               b.erase(ittt);
+          }
+          else
+          {
+               auto x=e.begin();
+               auto y = b.upper_bound(*x);
+               cnt++;
+               e.erase(x);
+               b.erase(y);
+          }
+     
+     }
+     cout<<cnt;
