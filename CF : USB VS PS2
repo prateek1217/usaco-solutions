@@ -1,0 +1,79 @@
+cf :  https://codeforces.com/contest/762/problem/B
+
+
+  int a, b, c;
+     cin>>a>>b>>c;
+   multiset<pair<int,string>>ps,usb;
+     int  m;
+     cin>>m;
+     rep(i,0,m)
+     {
+          int x;
+          cin>>x;
+          string s;
+          cin>>s;
+          if (s=="USB")
+          {
+               usb.insert({x,s});
+          }
+          else
+          {
+               ps.insert({x,s});
+          }
+     }
+     
+     int cnt =0;
+     ll sum=0;
+     for (int i=0;i<a && usb.size()!=0;i++)
+     {
+          auto it = usb.begin();
+          cnt++;
+          sum = sum + (ll)it->first;
+          usb.erase(it);
+     }
+     for (int i=0;i<b && ps.size()!=0;i++)
+     {
+          auto it = ps.begin();
+          cnt++;
+          sum = sum + (ll)it->first;
+          ps.erase(it);
+     }
+
+     
+     while(c-- && (usb.size()!=0 || ps.size()!=0))
+     {
+          if (usb.size()!=0 && ps.size()==0)
+          {
+               auto it = usb.begin();
+               cnt++;
+               sum= sum + (ll)it->first;
+               usb.erase(it);
+          }
+          else if ( usb.size()==0 && ps.size()!=0 )
+          {
+               auto it = ps.begin();
+               cnt++;
+               sum= sum + (ll)it->first;
+               ps.erase(it);
+          }
+          else
+          {
+               auto it= usb.begin();
+               auto itt = ps.begin();
+           if (it->first>itt->first)
+           {
+               cnt++;
+               sum = sum + (ll)itt->first;
+               ps.erase(itt);
+           }
+           else
+           {
+               cnt++;
+               sum = sum + (ll)it->first;
+               usb.erase(it);
+           }
+
+          }
+
+     }
+     cout<<cnt<<" "<<sum;
