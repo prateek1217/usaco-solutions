@@ -1,0 +1,26 @@
+huffman coding algo : abdul bari
+huffman proof: https://youtu.be/O_aUNJT7Ngk?si=UvvaMmNnem9IgPXI
+
+	int x,n;
+     cin>>x>>n;
+multiset<ll>m;
+rep(i,0,n)
+{
+	ll x;
+	cin>>x;
+	m.insert(x);
+}
+ll sum=0;
+for (int i=0;i<n-1;i++)
+{
+	auto x=m.begin();
+	ll ok=0;
+	ok+=*x;
+	m.erase(x);
+	auto y = m.begin();
+	ok+=*y;
+	m.erase(y);
+	m.insert(ok);
+	sum +=ok;
+}
+cout<<sum;
