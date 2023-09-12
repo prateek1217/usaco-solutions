@@ -1,0 +1,32 @@
+http://www.usaco.org/index.php?page=viewproblem2&cpid=714
+
+
+ io("helpcross");
+	int c,n;
+     cin>>c>>n;
+     multiset<int>ck;
+     rep(i,0,c)
+     {
+          int x;
+          cin>>x;
+          ck.insert(x);
+     }
+     vector <pair <int,int>>v;
+     rep(i,0,n)
+     {
+          int a,b;
+          cin>>a>>b;
+          v.push_back({b,a});
+     }
+     int ans =0;
+     sort(all(v));
+     rep(i,0,n)
+     {
+          auto it = ck.lower_bound(v[i].second);
+          if (it !=ck.end() && *it<=v[i].first)
+          {
+               ans++;
+               ck.erase(it);
+          }
+     }
+     cout<<ans;
