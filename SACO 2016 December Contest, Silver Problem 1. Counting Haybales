@@ -1,0 +1,46 @@
+http://www.usaco.org/index.php?page=viewproblem2&cpid=666
+
+  io("haybales");
+	int n ,k;
+     cin>>n>>k;
+     vector<int>v(n);
+     multiset<int>s;
+     rep(i,0,n)
+     {
+     cin>>v[i];
+     s.insert(v[i]);
+     }
+     sort(all(v));
+     map<int,int>l,r;
+     rep(i,0,n)
+     {
+          if (l.count(v[i])==0)
+          l.insert({v[i],i});
+     }
+     for (int i=n-1;i>=0;i--)
+     {
+          if (r.count(v[i])==0)
+          r.insert({v[i],i});
+     }
+     for (int i=0;i<k;i++)
+     {
+          int a,b;
+          cin>>a>>b;
+          auto it = s.lower_bound(a);
+          if (it==s.end())
+          {
+          cout<<0<<endl;
+          }
+          else
+          {
+          auto itt= s.upper_bound(b);
+          if (itt==s.begin())
+          cout<<0<<endl;
+          else
+          {
+               itt--;
+               cout<<r[*itt]-l[*it]+1<<endl;
+          }
+          }
+
+     }
